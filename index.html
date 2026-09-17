@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASF Achados — Achados e perdidos do pico</title>
+<meta name="description" content="Perdeu uma quilha? Achou um leash? O achados e perdidos da comunidade do surf feminino. Satélite do app ASF.">
+<link rel="canonical" href="https://acarolmourad-commits.github.io/asf-achados/">
+<style>body{font-family:system-ui,sans-serif;margin:0;background:#fffbeb;color:#451a03}header{background:#d97706;color:#fff;padding:2rem;text-align:center}nav{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;padding:1rem;background:#fef3c7}nav a{color:#b45309;text-decoration:none;font-size:.85rem}main{max-width:640px;margin:2rem auto;padding:0 1rem}.card{background:#fff;border-radius:16px;padding:1.5rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.08)}input,select{width:100%;padding:.6rem;margin:.3rem 0;border:1px solid #fcd34d;border-radius:8px;box-sizing:border-box}button{background:#d97706;color:#fff;border:0;border-radius:9999px;padding:.7rem 1.4rem;font-weight:700;cursor:pointer}.item{border-left:5px solid #d97706;background:#fffbeb;padding:.8rem;margin:.5rem 0;border-radius:8px}footer{text-align:center;padding:2rem;color:#78716c}</style>
+</head>
+<body>
+<header><h1>ASF Achados 🔍</h1><p>Achados e perdidos do pico — quilhas, leashes, chaves e mais</p></header>
+<nav id="net"></nav>
+<main>
+<div class="card"><h2>📢 Publicar</h2>
+<select id="tipo"><option value="Perdi">Perdi</option><option value="Achei">Achei</option></select>
+<input id="item" placeholder="Item (ex: quilha FCS rosa)">
+<select id="praia"><option>Maresias</option><option>Juquehy</option><option>Camburi</option><option>Baleia</option><option>Barra do Una</option><option>Boracéia</option><option>São Sebastião</option><option>Outra</option></select>
+<input id="contato" placeholder="Contato (@instagram ou WhatsApp)">
+<button onclick="pub()">Publicar</button></div>
+<div class="card"><h2>🧺 Mural</h2><div id="mural"></div></div>
+<div class="card"><p>🤝 Achou algo? Também pode anunciar no <a href="https://acarolmourad-commits.github.io/asf-mercado/">Mercado</a> ou perguntar na <a href="https://acarolmourad-commits.github.io/asf-comunidade/">Comunidade</a>. Veja onde aconteceu no <a href="https://acarolmourad-commits.github.io/asf-mapa/">Mapa</a>.</p></div>
+</main>
+<footer>ASF Achados — satélite do <a href="https://acarolmourad-commits.github.io/asf-app/">app ASF</a></footer>
+<script>
+const sites=[["asf-app","App ASF"],["asf-praias","Praias"],["asf-previsao","Previsão"],["asf-mapa","Mapa"],["asf-eventos","Eventos"],["asf-comunidade","Comunidade"],["asf-mercado","Mercado"],["asf-equipamento","Equipamento"],["asf-seguranca","Segurança"],["asf-carona","Carona"],["asf-parceiras","Parceiras"],["asf-galeria","Galeria"],["asf-quiz","Quiz"],["asf-diario","Diário"],["asf-desafios","Desafios"]];
+document.getElementById('net').innerHTML=sites.map(s=>`<a href="https://acarolmourad-commits.github.io/${s[0]}/">${s[1]}</a>`).join('');
+function load(){return JSON.parse(localStorage.getItem('asf-achados')||'[]');}
+function render(){const a=load();document.getElementById('mural').innerHTML=a.length?a.map(x=>`<div class="item">${x.tipo==='Perdi'?'😢 Perdi':'🎉 Achei'}: <b>${x.item}</b><br>📍 ${x.praia} · Contato: ${x.contato}<br><small>${x.d}</small></div>`).join(''):'<p>Nada perdido por aqui. 🌊</p>';}
+function pub(){const v=id=>document.getElementById(id).value.trim();if(!v('item'))return alert('Descreva o item!');const a=load();a.unshift({tipo:v('tipo'),item:v('item'),praia:v('praia'),contato:v('contato')||'—',d:new Date().toLocaleString('pt-BR')});localStorage.setItem('asf-achados',JSON.stringify(a.slice(0,50)));render();}
+render();
+</script>
+</body>
+</html>
