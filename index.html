@@ -57,5 +57,8 @@ function addXP(n){localStorage.setItem('asf_xp',XP()+n);document.getElementById(
 document.getElementById('xp').textContent=XP();
 const seed=[{t:'🎉 Achei',i:'Leash preto com parafina verde',w:'Maresias, posto 5'},{t:'😢 Perdi',i:'Chave do cadeado de bike',w:'Praia Grande'}];function render(){const l=JSON.parse(localStorage.getItem('asf_achados')||'null')||seed;document.getElementById('lista').innerHTML=l.map(x=>`<p>${x.t} — <b>${x.i}</b><br><i style="color:#888">${x.w}</i></p><hr>`).join('');}window.add=()=>{const x={t:document.getElementById('t').value,i:document.getElementById('i').value,w:document.getElementById('w').value};if(!x.i)return;const l=JSON.parse(localStorage.getItem('asf_achados')||'null')||seed;l.unshift(x);localStorage.setItem('asf_achados',JSON.stringify(l));render();addXP(5);};render();
 </script>
+
+<!-- ASF LGPD footer -->
+<footer style="margin-top:40px;padding:16px;text-align:center;font-size:12px;opacity:.75"><a href="https://acarolmourad-commits.github.io/asf-app/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a> · <a href="https://acarolmourad-commits.github.io/asf-app/cookies.html" target="_blank" rel="noopener">Política de Cookies</a> · <a href="https://acarolmourad-commits.github.io/asf-app/termos-de-uso.html" target="_blank" rel="noopener">Termos de Uso</a> · ASF — Associação de Surf Feminino</footer>
 </body>
 </html>
