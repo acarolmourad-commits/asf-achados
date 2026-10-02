@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://acarolmourad-commits.github.io/asf-achados/sitemap.xml
+
+Sitemap: https://achados.asf.surf/sitemap.xml
